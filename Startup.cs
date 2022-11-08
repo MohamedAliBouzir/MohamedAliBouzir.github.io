@@ -49,6 +49,8 @@ namespace FermliAPI
 
             services.AddSingleton<MedicinesService>();
             services.AddSingleton<DoctorsService>();
+            services.AddSingleton<AppointmentService>();
+            services.AddSingleton<MedicinePlanService>();
 
             services.AddScoped<ITokenService, TokenService>();
 
