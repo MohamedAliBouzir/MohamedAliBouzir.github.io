@@ -47,5 +47,31 @@ namespace FermliAPI.Controllers
             _medPlanService.Create(medPlan);
             return CreatedAtRoute("GetPlan", new { id = medPlan.id.ToString() }, medPlan);
         }
+        [HttpPut("{id}")]
+        public IActionResult Update(string id,MedicinePlan medPlanIn)
+        {
+            var medPlan = _medPlanService.Get(id);
+            if(medPlan == null)
+            {
+                return NotFound();
+            }
+            _medPlanService.Update(id, medPlanIn);
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id, string patientId)
+        {
+            var medPlan = _medPlanService.Get(id);
+            if(medPlan == null)
+            {
+                return NotFound();
+            }
+            else if ( patientId == medPlan.patientId)
+            {
+                _medPlanService.Remove(id);
+                return NoContent();
+            }
+            return NoContent();
+        }
     }
 }
